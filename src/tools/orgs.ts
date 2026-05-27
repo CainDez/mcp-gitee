@@ -1,0 +1,122 @@
+import type { ToolDef } from '../types.js';
+
+const page = { description: 'Page number', type: 'number' as const };
+const per_page = { description: 'Items per page (max 100)', type: 'number' as const };
+
+export const orgTools: ToolDef[] = [
+    {
+        name: 'gitee_get_org',
+        description: 'Get an organization',
+        method: 'GET',
+        path: '/orgs/{org}',
+        required: { org: 'Organization path' },
+    },
+    {
+        name: 'gitee_update_org',
+        description: 'Update an organization',
+        method: 'PATCH',
+        path: '/orgs/{org}',
+        required: { org: 'Organization path' },
+        optional: {
+            email: 'Organization email',
+            location: 'Location',
+            name: 'Organization name',
+            description: 'Description',
+            html_url: 'Homepage URL',
+        },
+    },
+    {
+        name: 'gitee_create_org',
+        description: 'Create an organization',
+        method: 'POST',
+        path: '/users/organization',
+        required: { name: 'Organization name', org: 'Organization path (slug)' },
+        optional: {
+            description: 'Description',
+            location: 'Location',
+            website: 'Website URL',
+        },
+    },
+    {
+        name: 'gitee_list_user_orgs',
+        description: 'List organizations for the authenticated user',
+        method: 'GET',
+        path: '/user/orgs',
+        optional: { page, per_page },
+    },
+    {
+        name: 'gitee_list_username_orgs',
+        description: 'List organizations for a user',
+        method: 'GET',
+        path: '/users/{username}/orgs',
+        required: { username: 'Username' },
+        optional: { page, per_page },
+    },
+    {
+        name: 'gitee_list_org_members',
+        description: 'List organization members',
+        method: 'GET',
+        path: '/orgs/{org}/members',
+        required: { org: 'Organization path' },
+        optional: { page, per_page },
+    },
+    {
+        name: 'gitee_get_org_membership',
+        description: 'Get a member\'s organization membership',
+        method: 'GET',
+        path: '/orgs/{org}/memberships/{username}',
+        required: { org: 'Organization path', username: 'Username' },
+    },
+    {
+        name: 'gitee_add_or_update_org_member',
+        description: 'Add or update an organization member',
+        method: 'PUT',
+        path: '/orgs/{org}/memberships/{username}',
+        required: { org: 'Organization path', username: 'Username' },
+        optional: { role: { description: 'Member role: member or owner', enum: ['member', 'owner'] } },
+    },
+    {
+        name: 'gitee_remove_org_member',
+        description: 'Remove a member from an organization',
+        method: 'DELETE',
+        path: '/orgs/{org}/memberships/{username}',
+        required: { org: 'Organization path', username: 'Username' },
+    },
+    {
+        name: 'gitee_list_my_org_memberships',
+        description: 'List authenticated user\'s organization memberships',
+        method: 'GET',
+        path: '/user/memberships/orgs',
+        optional: { active: { description: 'Filter active memberships', type: 'boolean' }, page, per_page },
+    },
+    {
+        name: 'gitee_get_my_org_membership',
+        description: 'Get authenticated user\'s membership in an organization',
+        method: 'GET',
+        path: '/user/memberships/orgs/{org}',
+        required: { org: 'Organization path' },
+    },
+    {
+        name: 'gitee_update_my_org_membership',
+        description: 'Update authenticated user\'s membership in an organization',
+        method: 'PATCH',
+        path: '/user/memberships/orgs/{org}',
+        required: { org: 'Organization path' },
+        optional: { state: { description: 'Membership state: active or pending', enum: ['active', 'pending'] } },
+    },
+    {
+        name: 'gitee_leave_org',
+        description: 'Leave an organization',
+        method: 'DELETE',
+        path: '/user/memberships/orgs/{org}',
+        required: { org: 'Organization path' },
+    },
+    {
+        name: 'gitee_list_org_followers',
+        description: 'List organization followers',
+        method: 'GET',
+        path: '/orgs/{org}/followers',
+        required: { org: 'Organization path' },
+        optional: { page, per_page },
+    },
+];

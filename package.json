@@ -1,0 +1,24 @@
+{
+  "name": "mcp-gitee",
+  "version": "1.0.0",
+  "description": "Full-featured Gitee MCP server covering all Gitee API v5 endpoints",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "mcp-gitee": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "axios": "^1.7.9",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  }
+}
