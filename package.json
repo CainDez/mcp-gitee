@@ -7,8 +7,24 @@
   "bin": {
     "mcp-gitee": "dist/index.js"
   },
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "author": "CainDez",
+  "keywords": [
+    "mcp",
+    "gitee",
+    "model-context-protocol",
+    "ai"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CainDez/mcp-gitee.git"
+  },
   "scripts": {
     "build": "tsc",
+    "prepare": "npm run build",
     "start": "node dist/index.js",
     "dev": "tsc --watch"
   },
