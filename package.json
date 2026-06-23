@@ -1,6 +1,6 @@
 {
   "name": "mcp-gitee",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Full-featured Gitee MCP server covering all Gitee API v5 endpoints",
   "type": "module",
   "main": "dist/index.js",

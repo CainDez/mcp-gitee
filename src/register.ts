@@ -29,7 +29,7 @@ export function registerTools(server: McpServer, client: GiteeClient, tools: Too
 
         server.tool(def.name, def.description, schema, async (args: Record<string, unknown>) => {
             try {
-                const result = await client.request(def.method, def.path, args);
+                const result = await client.request(def.method, def.path, args, def.multipart);
                 return { content: [{ type: 'text' as const, text: JSON.stringify(result, null, 2) }] };
             } catch (err: unknown) {
                 const e = err as { message?: string; response?: { data?: unknown } };

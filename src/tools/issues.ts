@@ -122,6 +122,14 @@ export const issueTools: ToolDef[] = [
         optional: { sort: { description: 'asc or desc', enum: ['asc', 'desc'] } },
     },
     {
+        name: 'gitee_list_issue_pull_requests',
+        description: 'List pull requests associated with an issue',
+        method: 'GET',
+        path: '/repos/{owner}/issues/{number}/pull_requests',
+        required: { owner, number: 'Issue number' },
+        optional: { repo: 'Repository name' },
+    },
+    {
         name: 'gitee_list_repo_issue_comments',
         description: 'List all issue comments for a repository',
         method: 'GET',

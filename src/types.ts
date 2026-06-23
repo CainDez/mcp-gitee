@@ -13,4 +13,5 @@ export interface ToolDef {
   path: string;
   required?: Record<string, ParamDef | string>;
   optional?: Record<string, ParamDef | string>;
+  multipart?: boolean;
 }
