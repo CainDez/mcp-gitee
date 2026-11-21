@@ -51,9 +51,27 @@ const allTools = [
     ...miscTools,
 ];
 
-registerTools(server, client, allTools);
+// Optional subset: comma-separated tool names in GITEE_TOOLS. Empty or unset
+// keeps the full API surface. Cuts the schema every request has to carry.
+const selected = (process.env['GITEE_TOOLS'] ?? '')
+    .split(',')
+    .map((name) => name.trim())
+    .filter(Boolean);
+const unknown = selected.filter((name) => !allTools.some((tool) => tool.name === name));
+if (unknown.length) {
+    process.stderr.write(`mcp-gitee: GITEE_TOOLS names not offered: ${unknown.join(', ')}\n`);
+}
+const tools = selected.length
+    ? allTools.filter((tool) => selected.includes(tool.name))
+    : allTools;
 
-process.stderr.write(`mcp-gitee: registered ${allTools.length} tools\n`);
+registerTools(server, client, tools);
+
+process.stderr.write(
+    `mcp-gitee: registered ${tools.length} tools` +
+        (selected.length ? ` (of ${allTools.length}, GITEE_TOOLS)` : '') +
+        '\n',
+);
 
 const transport = new StdioServerTransport();
 await server.connect(transport);
