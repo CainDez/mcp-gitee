@@ -30,7 +30,7 @@ const client = new GiteeClient(token, baseUrl);
 
 const server = new McpServer({
     name: 'mcp-gitee',
-    version: '1.0.1',
+    version: '1.1.0',
 });
 
 const allTools = [
