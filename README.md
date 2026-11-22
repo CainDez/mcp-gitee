@@ -28,6 +28,27 @@ Optionally override the API base URL (defaults to `https://gitee.com/api/v5`):
 export GITEE_API_URL=https://gitee.com/api/v5
 ```
 
+## Tool subset (optional)
+
+Set `GITEE_TOOLS` to a comma-separated list of exact, case-sensitive tool names
+to register only those tools in this MCP server:
+
+```bash
+export GITEE_TOOLS="gitee_get_repo,gitee_list_repo_issues,gitee_list_pulls"
+```
+
+If your MCP client launches the server, set the same key in the client's
+server environment (`env` in the Claude Desktop example below).
+
+- Unset, empty, or whitespace-only: register the full catalog.
+- Surrounding whitespace and duplicate names are ignored. Unknown names are
+  reported on stderr; recognized names still register.
+- A nonblank setting with no recognized names (including just commas) is a
+  startup error; it does not fall back to the full catalog.
+
+Advertising fewer tools can reduce the tool definitions sent by a client.
+This setting does not change the permissions of your Gitee access token.
+
 ## Gitee API Compatibility
 
 Tool coverage is checked against the official Gitee API v5 documentation:
